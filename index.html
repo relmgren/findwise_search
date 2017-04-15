@@ -35,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="person in vm.peopleList track by person.accountId">
+          <tr ng-repeat="person in vm.peopleList track by person.accountId | orderBy: vm.sortOption.value">
             <td>{{person.name}}</td>
             <td>{{person.phone}}</td>
             <td>{{person.email}}</td>
@@ -44,7 +44,7 @@
       </table>
 
       <div class="button-segment" ng-if="vm.pagingArray.length >= 0">
-        <button ng-repeat="i in vm.pagingArray" type="button" name="button" value="{{vm.pagingArray[i]}}" ng-click="vm.searchClick(i)" ng-disabled="vm.currentPage === i">{{i + 1}}</button>
+        <button ng-repeat="i in vm.pagingArray" type="button" name="button" value="{{vm.pagingArray[i]}}" ng-click="vm.searchClick(i)" ng-disabled="vm.currentPage === i" ng-class="{'button-selected' : vm.currentPage === i}">{{i + 1}}</button>
       </div>
     </div>
 
