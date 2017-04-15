@@ -17,7 +17,14 @@
     <img class="loading" src="img/loading.gif" ng-show="vm.loading">
 
     <div class="container results" id="white-bg" ng-if="vm.searchStats">
-      <p id="resultsInfo" ng-show="vm.searchStats"><small>{{vm.searchStats.totalHits}} results ({{vm.searchStats.searchEngineRoundTripTimeInMillis}} ms)</small></p>
+      <div id="resultsInfo">
+        <p ng-show="vm.searchStats"><small>{{vm.searchStats.totalHits}} results ({{vm.searchStats.searchEngineRoundTripTimeInMillis}} ms)</small></p>
+
+        <div id="results-sort">
+          <p>sort by: </p>
+          <select name="sortSelect" ng-change="vm.sortChange()" ng-model="vm.sortOption" ng-options="option.name for option in vm.sortOptions track by option.value"></select>
+        </div>
+      </div>
 
       <table id="results-table "ng-if="vm.peopleList.length > 0">
         <thead>
@@ -36,8 +43,8 @@
         </tbody>
       </table>
 
-      <div class="button-segment" ng-if="vm.pagingArray.length > 0">
-        <button ng-repeat="i in vm.pagingArray" type="button" name="button" value="{{vm.pagingArray[i]}}" ng-click="vm.searchClick({i})" ng-disabled="vm.currentPage == i">{{vm.pagingArray[i] + 1}}</button>
+      <div class="button-segment" ng-if="vm.pagingArray.length >= 0">
+        <button ng-repeat="i in vm.pagingArray" type="button" name="button" value="{{vm.pagingArray[i]}}" ng-click="vm.searchClick(i)" ng-disabled="vm.currentPage === i">{{i + 1}}</button>
       </div>
     </div>
 

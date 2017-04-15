@@ -43,8 +43,15 @@ input[type="text"] {
   text-align: left;
   /* Puts the stats left centered under the search bar */
   padding-left: calc(50% - 167px);
+  padding-right: calc(50% - 167px);
   padding-top: 2px;
   color: grey;
+  display: flex;
+  justify-content: space-between;
+}
+
+#results-sort * {
+  display: inline-block;
 }
 
 #white-bg {

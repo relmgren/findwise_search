@@ -9,11 +9,28 @@ angular
     vm.searchStats;
     vm.loading = false;
     vm.pagingArray = [];
+    vm.sortOptions = [
+      {value: 'name.asc', name: 'Name ASC'},
+      {value: 'name.desc', name: 'Name DSC'},
+      {value: 'name.score', name: 'Relevance'}
+    ];
+    vm.sortOption = {value: 'name.score', name: 'Relevance'};
 
-    vm.searchClick = function(page = 0) {
-      vm.currentPage = 0;
+    //functions
+    vm.searchClick = searchClick;
+    vm.createPagingButtons = createPagingButtons;
+    vm.sortChange = function() {
+      vm.searchClick();
+    }
+    vm.show = function() {
+      console.log(vm.peopleList);
+    }
+
+
+
+    function searchClick(page = 0) {
       console.log(page);
-
+      vm.currentPage = page;
       if (typeof page === 'object') {
         page = page.i;
         console.log(page);
@@ -24,12 +41,12 @@ angular
       vm.pagingArray = [];
       vm.loading = true;
       //peopleFactory returns a promise
-      peopleFactory.get(vm.search, page, 10, 'show')
+      peopleFactory.get(vm.search, page, vm.resultsPerPage, vm.sortOption.value, 'show')
         .then(function(res) {
           //successful request
           vm.peopleList = res.data.documentList.documents;
           vm.searchStats = res.data.stats;
-          vm.pagingArray = vm.createPagingButtons();
+          vm.createPagingButtons();
         }, function(err, status) {
           //error request
           console.log("server responded with status: " + status + "error");
@@ -41,20 +58,15 @@ angular
         })
     }
 
-    vm.show = function() {
-      console.log(vm.peopleList);
-    }
-
     //Creates an array that we can ng-Repeat over to create buttons with containing values.
-    vm.createPagingButtons = function() {
-      var numOfPageButtons = parseInt(vm.searchStats.totalHits / vm.resultsPerPage);
+    function createPagingButtons() {
+      var numOfPageButtons = Math.ceil(vm.searchStats.totalHits / vm.resultsPerPage);
       var i = 0;
       var resultArray = [];
 
       if(numOfPageButtons == 0) {
         return resultArray;
       } else if (numOfPageButtons > 10) {
-
         if (vm.currentPage < 5) {
           while (i < 10) {
             resultArray[i] = i;
@@ -79,7 +91,7 @@ angular
         }
       }
       console.log(resultArray);
-      return resultArray;
+      vm.pagingArray = resultArray;
     }
 
     // If we want every entry to check in database uncomment this.

@@ -1,11 +1,12 @@
 angular
   .module('mainApp')
   .factory('peopleFactory', function($http, $q, $jsonpCallbacks) {
+    //url should IRL be kept in a .dotenv file and gathered from there.
     var url = 'http://search.i3demo.findwise.com/rest/apps/demo/searchers/programming_assinment';
     return {
-      get: function(search, offset, hitsperpage, callback) {
+      get: function(search, offset, hitsperpage, sort, callback) {
         var defer = $q.defer();
-        var query = "?offset=" + offset + "&hits=" + hitsperpage + "&q=" +search;
+        var query = "?offset=" + offset + "&hits=" + hitsperpage + "&q=" +search + "&sort=" + sort;
         var request = url + query;
 
         $http.defaults.jsonCallbackParam = callback;
