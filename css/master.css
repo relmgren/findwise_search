@@ -1,0 +1,71 @@
+body {
+  background-color: #ffffff;
+  text-align: -webkit-center;
+  margin: 0;
+}
+
+/* Indents the text in the input */
+input[type="text"] {
+  padding-left: 10px;
+}
+
+#searchContainer {
+  background-color: #fafafa;
+}
+
+#logo {
+  background-image: url('../img/findwiselogo.png');
+  height: 56px;
+  width: 334px;
+  margin-bottom: 20px;
+}
+
+#searchInput {
+  width: 290px;
+  height: 30px;
+  border: 1px solid rgb(185,185,185);
+  border-right: none;
+}
+
+#searchButton {
+  height: 34px;
+  width: 33px;
+  padding: 0px;
+  border: 1px solid rgb(185,185,185);
+  border-left: none;
+  border-right: none;
+  background-color: rgb(185,185,185);
+  background: url('../img/findwisesearch.png') no-repeat top left;
+  background-size: contain;
+}
+
+#resultsInfo {
+  text-align: left;
+  /* Puts the stats left centered under the search bar */
+  padding-left: calc(50% - 167px);
+  padding-top: 2px;
+  color: grey;
+}
+
+#white-bg {
+  background-color: #ffffff;
+  padding-top: 2px;
+}
+
+.container {
+  padding: 10%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.button-segment {
+  margin-top: 15px;
+}
+
+.button-segment button {
+  width: 40px;
+  margin: 2px;
+}
+
+.ng-dirty {
+}

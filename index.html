@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Findwise Search Bar</title>
+    <link rel="stylesheet" href="css/master.css">
+  </head>
+  <body ng-app="mainApp" ng-controller="mainController as vm">
+
+    <div class="container" id="searchContainer">
+      <div id="logo"></div>
+      <form id="searchForm">
+        <input id="searchInput" type="text" name="search" value="" placeholder="Search the people-list" ng-model="vm.search"/><input id="searchButton" type="submit" value=" " name="searchButton" ng-click="vm.searchClick()"></input>
+      </form>
+    </div>
+
+    <img class="loading" src="img/loading.gif" ng-show="vm.loading">
+
+    <div class="container results" id="white-bg" ng-if="vm.searchStats">
+      <p id="resultsInfo" ng-show="vm.searchStats"><small>{{vm.searchStats.totalHits}} results ({{vm.searchStats.searchEngineRoundTripTimeInMillis}} ms)</small></p>
+
+      <table id="results-table "ng-if="vm.peopleList.length > 0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="person in vm.peopleList track by person.accountId">
+            <td>{{person.name}}</td>
+            <td>{{person.phone}}</td>
+            <td>{{person.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="button-segment" ng-if="vm.pagingArray.length > 0">
+        <button ng-repeat="i in vm.pagingArray" type="button" name="button" value="{{vm.pagingArray[i]}}" ng-click="vm.searchClick({i})" ng-disabled="vm.currentPage == i">{{vm.pagingArray[i] + 1}}</button>
+      </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/factory/peopleFactory.js"></script>
+    <script src="js/controller/mainController.js"></script>
+  </body>
+</html>
