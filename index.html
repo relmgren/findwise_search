@@ -7,17 +7,19 @@
   </head>
   <body ng-app="mainApp" ng-controller="mainController as vm">
 
-    <div class="container" id="searchContainer">
+    <div class="container" id="search-container">
       <div id="logo"></div>
-      <form id="searchForm">
-        <input id="searchInput" type="text" name="search" value="" placeholder="Search the people-list" ng-model="vm.search"/><input id="searchButton" type="submit" value=" " name="searchButton" ng-click="vm.searchClick()"></input>
+      <form id="search-form">
+        <input id="search-input" type="text" name="search" value="" placeholder="Search the people-list" ng-model="vm.search"/><input id="search-button" type="submit" value=" " name="search-button" ng-click="vm.searchClick()"></input>
       </form>
+
+      <hr>
     </div>
 
     <img class="loading" src="img/loading.gif" ng-show="vm.loading">
 
-    <div class="container results" id="white-bg" ng-if="vm.searchStats">
-      <div id="resultsInfo">
+    <div class="container results"  ng-if="vm.searchStats">
+      <div id="results-info">
         <p ng-show="vm.searchStats"><small>{{vm.searchStats.totalHits}} results ({{vm.searchStats.searchEngineRoundTripTimeInMillis}} ms)</small></p>
 
         <div id="results-sort">
@@ -26,25 +28,24 @@
         </div>
       </div>
 
-      <table id="results-table "ng-if="vm.peopleList.length > 0">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="person in vm.peopleList track by person.accountId | orderBy: vm.sortOption.value">
-            <td>{{person.name}}</td>
-            <td>{{person.phone}}</td>
-            <td>{{person.email}}</td>
-          </tr>
-        </tbody>
-      </table>
 
-      <div class="button-segment" ng-if="vm.pagingArray.length >= 0">
-        <button ng-repeat="i in vm.pagingArray" type="button" name="button" value="{{i}}" ng-click="vm.searchClick(i)" ng-disabled="vm.currentPage === i" ng-class="{'button-selected' : vm.currentPage === i}">{{i + 1}}</button>
+      <div id="results-list" ng-if="vm.peopleList.length > 0">
+        <div class="person" ng-repeat="person in vm.peopleList track by person.accountId | orderBy: vm.sortOption.value">
+          <img src="img/genericpersonicon.png">
+            <p>{{person.name}}</p>
+            <div class="person-contact">
+              <div class="person-contact-phone">
+                <img src="img/phone.png"> <p>{{person.phone}}</p>
+              </div>
+              <div class="person-contact-email">
+                <img src="img/email.png"> <p>{{person.email}}</p>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="button-segment" ng-if="vm.paging">
+        <a class="paging-button" ng-repeat="page in vm.paging.pages" value="{{page.displayName}}" ng-click="vm.searchClick(page)" ng-disabled="page.selected == false" ng-class="{'button-selected' : page.selected == true}">{{page.displayName}}</a>
       </div>
     </div>
 

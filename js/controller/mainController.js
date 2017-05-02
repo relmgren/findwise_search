@@ -3,10 +3,12 @@ angular
   .controller('mainController', function($scope, peopleFactory) {
     //to avoid using $scope
     var vm = this;
-    vm.resultsPerPage = 10;
+    vm.resultsPerPage = 9;
     vm.currentPage = 0;
     vm.peopleList;
     vm.searchStats;
+    vm.paging;
+
     vm.loading = false;
     vm.pagingArray = [];
     vm.sortOptions = [
@@ -18,80 +20,42 @@ angular
 
     //functions
     vm.searchClick = searchClick;
-    vm.createPagingButtons = createPagingButtons;
     vm.sortChange = function() {
       vm.searchClick();
     }
-    vm.show = function() {
-      console.log(vm.peopleList);
-    }
-
-
 
     function searchClick(page = 0) {
       console.log(page);
-      vm.currentPage = page;
-      if (typeof page === 'object') {
-        page = page.i;
-        console.log(page);
-        vm.currentPage = page;
-      }
+
       vm.peopleList = {};
       vm.searchStats = {};
       vm.pagingArray = [];
       vm.loading = true;
       //peopleFactory returns a promise
-      peopleFactory.get(vm.search, page, vm.resultsPerPage, vm.sortOption.value, 'show')
-        .then(function(res) {
-          //successful request
-          vm.peopleList = res.data.documentList.documents;
-          vm.searchStats = res.data.stats;
-          vm.createPagingButtons();
-        }, function(err, status) {
-          //error request
-          console.log("server responded with status: " + status + "error");
-          console.log(err);
-        })
-        .finally(function() {
-          vm.loading = false;
-        //  vm.show();
-        })
+      if (page != 0) {
+        peopleFactory.getFromQuery(page.query)
+          .then(successCallback, badCallback)
+          .finally(afterCallbacks)
+      } else {
+        peopleFactory.get(vm.search, vm.resultsPerPage, vm.sortOption.value)
+          .then(successCallback, badCallback)
+          .finally(afterCallbacks)
+      }
     }
 
-    //Creates an array that we can ng-Repeat over to create buttons with containing values.
-    function createPagingButtons() {
-      var numOfPageButtons = Math.ceil(vm.searchStats.totalHits / vm.resultsPerPage);
-      var i = 0;
-      var resultArray = [];
+    function successCallback(res) {
+      vm.peopleList = res.data.documentList.documents;
+      vm.searchStats = res.data.stats;
+      vm.paging = res.data.documentList.pagination;
+    }
 
-      if(numOfPageButtons == 0) {
-        return resultArray;
-      } else if (numOfPageButtons > 10) {
-        if (vm.currentPage < 5) {
-          while (i < 10) {
-            resultArray[i] = i;
-            i++;
-          }
-          //We want currentPage to be the middle-st button in a range of 10.
-        } else if (vm.currentPage >= 5 && numOfPageButtons >= (vm.currentPage + 5)) {
-          while (i < 10) {
-            resultArray[i] = (vm.currentPage - 5) + i;
-            i++;
-          }
-        } else {
-          while (i < 10) {
-            resultArray[9 - i] = numOfPageButtons - i;
-            i++;
-          }
-        }
-      } else {
-        while (i < numOfPageButtons) {
-          resultArray[i] = i;
-          i++;
-        }
-      }
-      console.log(resultArray);
-      vm.pagingArray = resultArray;
+    function badCallback(err, status) {
+      console.log("server responded with status: " + status + "error");
+      console.log(err);
+    }
+
+    function afterCallbacks() {
+      vm.loading = false;
     }
 
     // If we want every entry to check in database uncomment this.

@@ -1,5 +1,7 @@
 body {
-  background-color: #ffffff;
+  background: #fd746c;
+  background: linear-gradient(to right, #fd746c, #ff9068);
+
   text-align: -webkit-center;
   margin: 0;
 }
@@ -9,8 +11,8 @@ input[type="text"] {
   padding-left: 10px;
 }
 
-#searchContainer {
-  background-color: #fafafa;
+#search-container hr{
+  width: 70%;
 }
 
 #logo {
@@ -20,14 +22,14 @@ input[type="text"] {
   margin-bottom: 20px;
 }
 
-#searchInput {
+#search-input {
   width: 290px;
   height: 30px;
   border: 1px solid rgb(185,185,185);
   border-right: none;
 }
 
-#searchButton {
+#search-button {
   height: 34px;
   width: 33px;
   padding: 0px;
@@ -37,26 +39,66 @@ input[type="text"] {
   background-color: rgb(185,185,185);
   background: url('../img/findwisesearch.png') no-repeat top left;
   background-size: contain;
+
+  cursor: pointer;
 }
 
-#resultsInfo {
-  text-align: left;
-  /* Puts the stats left centered under the search bar */
-  padding-left: calc(50% - 167px);
-  padding-right: calc(50% - 167px);
-  padding-top: 2px;
-  color: grey;
-  display: flex;
-  justify-content: space-between;
+#results-info {
+    text-align: left;
+    margin-left: calc(50% - 165px);
+    margin-right: calc(50% - 165px);
+    padding-left: 10px;
+    padding-right: 10px;
+    color: grey;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fefefe;
 }
 
 #results-sort * {
   display: inline-block;
 }
 
-#white-bg {
-  background-color: #ffffff;
-  padding-top: 2px;
+#results-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  /* Keeps the grid to a maximum of 3 items */
+  max-width: 1300px;
+}
+
+.person {
+  float: left;
+  background: #fefefe;
+  padding-top: 20px;
+
+  width: 400px;
+  height: 250px;
+
+
+  margin-right: 15px;
+  margin-top: 15px;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.person:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.person-contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.person-contact > * {
+  display: flex;
+  align-items: center;
 }
 
 .container {
@@ -66,23 +108,28 @@ input[type="text"] {
 }
 
 .button-segment {
+  display: block;
   margin-top: 15px;
 }
 
-.button-segment button {
-  width: 30px;
-  height: 20px;
-  margin: 2px;
-}
 
-.button-segment button:hover {
-  background-color: #cccccc;
+
+.paging-button {
+    text-align: center;
+    margin: 10px;
+    padding: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+
+    cursor: pointer;
+}
+.paging-button:hover {
+    background-color: #fd8f7f;
+    box-shadow: 0 2px 8px;
 }
 
 .button-selected {
-  background-color: #676767;
-  color: white;
-}
-
-.ng-dirty {
+    border: 3px solid transparent;
+    background-color: #FFA69A;
 }
