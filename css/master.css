@@ -1,14 +1,11 @@
 body {
   background: #fd746c;
-  background: linear-gradient(to right, #fd746c, #ff9068);
+  background: linear-gradient(to right, #fd746c 0%, #e9c377 60%,  #032b4f 100%);
+
+
 
   text-align: -webkit-center;
   margin: 0;
-}
-
-/* Indents the text in the input */
-input[type="text"] {
-  padding-left: 10px;
 }
 
 #search-container hr{
@@ -16,26 +13,36 @@ input[type="text"] {
 }
 
 #logo {
-  background-image: url('../img/findwiselogo.png');
-  height: 56px;
-  width: 334px;
+  background-image: url('../img/findwiselogo2.png');
+  height: 69px;
+  width: 454px;
   margin-bottom: 20px;
+  margin-top: 60px;
+  margin-left: 40px;
+}
+
+#search-form {
+  display: flex;
+  justify-content: center;
 }
 
 #search-input {
-  width: 290px;
-  height: 30px;
+  font-size: 1.4em;
+  width: calc(30%);
+  min-width: 300px;
+  height: 50px;
   border: 1px solid rgb(185,185,185);
   border-right: none;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 40px;
 }
 
 #search-button {
-  height: 34px;
-  width: 33px;
-  padding: 0px;
-  border: 1px solid rgb(185,185,185);
-  border-left: none;
-  border-right: none;
+  height: 54px;
+  width: 54px;
+  border: none;
   background-color: rgb(185,185,185);
   background: url('../img/findwisesearch.png') no-repeat top left;
   background-size: contain;
@@ -45,8 +52,8 @@ input[type="text"] {
 
 #results-info {
     text-align: left;
-    margin-left: calc(50% - 165px);
-    margin-right: calc(50% - 165px);
+    margin-left: calc(30% - 165px);
+    margin-right: calc(30% - 165px);
     padding-left: 10px;
     padding-right: 10px;
     color: grey;
@@ -92,7 +99,6 @@ input[type="text"] {
 .person-contact {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -115,21 +121,24 @@ input[type="text"] {
 
 
 .paging-button {
-    text-align: center;
-    margin: 10px;
-    padding: 8px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+  background-color: #fefefe;
 
-    cursor: pointer;
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+  margin-left: 4px;
+
+  cursor: pointer;
 }
 .paging-button:hover {
-    background-color: #fd8f7f;
-    box-shadow: 0 2px 8px;
+  background-color: #fd8f7f;
+  box-shadow: 0 2px 8px;
 }
 
 .button-selected {
-    border: 3px solid transparent;
-    background-color: #FFA69A;
+  border: 3px solid transparent;
+  background-color: #FFA69A;
 }

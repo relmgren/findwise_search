@@ -47,6 +47,7 @@ angular
       vm.peopleList = res.data.documentList.documents;
       vm.searchStats = res.data.stats;
       vm.paging = res.data.documentList.pagination;
+      vm.sortOptions = res.data.documentList.sortOptions;
     }
 
     function badCallback(err, status) {

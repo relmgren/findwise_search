@@ -17,10 +17,17 @@ angular
       */
       getFromQuery: function(query) {
         var string = String(query);
-        var re1 = new RegExp(/(\&callback\=angular\.callbacks\._)\d/);
-        var re2 = new RegExp(/(format\=jsonp)/);
-        string = string.replace(re1, "");
-        string = string.replace(re2, "?");
+
+        var re1 = new RegExp(/(format\=jsonp\&)/);
+        if (!query.startsWith("hits")) {
+          string = string.replace(re1, "?");
+        } else {
+          string = string.replace(re1, "");
+          string = "?" + string;
+        }
+        var re2 = new RegExp(/(\&callback\=angular\.callbacks\._)\d/);
+        string = string.replace(re2, "");
+
         var request = url + string;
         return sendRequest(request);
       }
