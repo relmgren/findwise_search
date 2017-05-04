@@ -7,6 +7,8 @@
   </head>
   <body ng-app="mainApp" ng-controller="mainController as vm">
 
+    <img src="img/triangles-wallpapers.jpg" id="bg-img" alt="">
+
     <div class="container" id="search-container">
       <div id="logo"></div>
       <form id="search-form">
@@ -15,21 +17,20 @@
       </form>
     </div>
 
-    <img class="loading" src="img/loading.gif" ng-show="vm.loading">
 
     <div class="container results"  ng-if="vm.searchStats">
       <div id="results-info">
         <p ng-show="vm.searchStats"><small>{{vm.searchStats.totalHits}} results ({{vm.searchStats.searchEngineRoundTripTimeInMillis}} ms)</small></p>
 
         <div id="results-sort" ng-show="vm.searchStats.totalHits > 0">
-          <p>sort by: </p>
-          <form>
-            <label ng-repeat="option in vm.sortOptions track by $index">
-              <input type="radio" ng-click="vm.searchClick(option)" ng-value="{{option.selected == true}}"><p>{{option.displayName}}</p>
-            </div>
+          <form name="sortOption">
+            <label for="sortOption">sort by: </label>
+            <select class="" name="sortOption" ng-model="vm.sortOption" ng-options="option as option.displayName for option in vm.sortOptions" ng-change="vm.searchClick(vm.sortOption)">
+            </select>
           </form>
         </div>
       </div>
+      <img class="loading" src="img/loading.gif" ng-show="vm.loading">
 
 
       <div id="results-list" ng-if="vm.peopleList.length > 0">

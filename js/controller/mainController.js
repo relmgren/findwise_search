@@ -37,6 +37,7 @@ angular
           .then(successCallback, badCallback)
           .finally(afterCallbacks)
       } else {
+
         peopleFactory.get(vm.search, vm.resultsPerPage, vm.sortOption.value)
           .then(successCallback, badCallback)
           .finally(afterCallbacks)
@@ -48,6 +49,12 @@ angular
       vm.searchStats = res.data.stats;
       vm.paging = res.data.documentList.pagination;
       vm.sortOptions = res.data.documentList.sortOptions;
+      for (var i = 0; i < vm.sortOptions.length; i++) {
+        if (vm.sortOptions[i].selected == true) {
+          vm.sortOption = vm.sortOptions[i];
+          break;
+        }
+      }
     }
 
     function badCallback(err, status) {

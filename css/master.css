@@ -2,10 +2,19 @@ body {
   background: #fd746c;
   background: linear-gradient(to right, #fd746c 0%, #e9c377 60%,  #032b4f 100%);
 
-
-
   text-align: -webkit-center;
   margin: 0;
+}
+
+#bg-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1000;
+  -webkit-filter: saturate(0.6) blur(10px);
+  filter: saturate(0.6) blur(10px);
 }
 
 #search-container hr{
@@ -13,7 +22,7 @@ body {
 }
 
 #logo {
-  background-image: url('../img/findwiselogo2.png');
+  background-image: url('../img/findwiselogo1.png');
   height: 69px;
   width: 454px;
   margin-bottom: 20px;
@@ -27,7 +36,7 @@ body {
 }
 
 #search-input {
-  font-size: 1.4em;
+  font-size: 1.5em;
   width: calc(30%);
   min-width: 300px;
   height: 50px;
@@ -59,6 +68,7 @@ body {
     color: grey;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: #fefefe;
 }
 
